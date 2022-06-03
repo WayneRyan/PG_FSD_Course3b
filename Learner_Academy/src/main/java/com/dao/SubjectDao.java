@@ -1,15 +1,14 @@
 package com.dao;
 
-import com.entity.Students_entity;
-import com.entity.Subjects_entity;
+import com.entity.StudentsEntity;
+import com.entity.SubjectsEntity;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SubjectDao {
-    public static boolean persist_Subject(Subjects_entity subject){
+    public static boolean persistSubject(SubjectsEntity subject){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
@@ -29,7 +28,26 @@ public class SubjectDao {
         return retVal;
     }
 
-    public static boolean delete_Subject(Subjects_entity subject){
+    public static List<SubjectsEntity> getAllSubjects(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        List<SubjectsEntity> retval = new ArrayList<>();
+        try {
+            TypedQuery<SubjectsEntity> tq = em.createQuery("SELECT se FROM SubjectsEntity se", SubjectsEntity.class);
+            retval = tq.getResultList();
+        } finally {
+            if (et.isActive()){
+                et.rollback();
+            }
+            em.close();
+            emf.close();
+        }
+        return retval;
+    }
+
+
+    public static boolean deleteSubject(SubjectsEntity subject){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();

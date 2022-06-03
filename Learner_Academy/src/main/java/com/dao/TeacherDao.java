@@ -1,7 +1,6 @@
 package com.dao;
 
-import com.entity.Subjects_entity;
-import com.entity.Teachers_entity;
+import com.entity.TeachersEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,7 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 public class TeacherDao {
-    public static boolean persist_Teacher(Teachers_entity teacher){
+    public static boolean persist_Teacher(TeachersEntity teacher){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
@@ -29,7 +28,7 @@ public class TeacherDao {
         return retVal;
     }
 
-    public static boolean delete_Teacher(Teachers_entity teacher){
+    public static boolean delete_Teacher(TeachersEntity teacher){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();

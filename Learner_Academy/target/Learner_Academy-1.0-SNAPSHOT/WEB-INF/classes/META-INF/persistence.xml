@@ -5,11 +5,11 @@
              version="2.2">
     <persistence-unit name="default">
 
-        <class>com.entity.Classes_entity</class>
-        <class>com.entity.Students_entity</class>
+        <class>com.entity.ClassesEntity</class>
+        <class>com.entity.StudentsEntity</class>
         <class>com.entity.StudentsClasses_entity</class>
-        <class>com.entity.Subjects_entity</class>
-        <class>com.entity.Teachers_entity</class>
+        <class>com.entity.SubjectsEntity</class>
+        <class>com.entity.TeachersEntity</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3305/learner_academy"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>

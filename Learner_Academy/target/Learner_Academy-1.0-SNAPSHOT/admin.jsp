@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.entity.SubjectsEntity" %>
+<%@ page import="com.dao.SubjectDao" %><%--
   Created by IntelliJ IDEA.
   User: wryan
   Date: 6/2/2022
@@ -33,6 +35,13 @@
     <input type="submit" name="submit" value="submit">
     <input type="reset" name="reset" value="reset">
 </form>
+<h3>All Subjects</h3>
+<ul>
+    <% for (SubjectsEntity se: SubjectDao.getAllSubjects()) { %>
+    <li><%= se.getName() %></li>
+    <% } %>
+</ul>
+<table></table>
 <br/><br/>
 <h3>Add new teacher</h3>
 <form action="TeacherServlet" method="post">

@@ -1,9 +1,7 @@
 package com.controller;
 
-import com.dao.SubjectDao;
 import com.dao.TeacherDao;
-import com.entity.Subjects_entity;
-import com.entity.Teachers_entity;
+import com.entity.TeachersEntity;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -24,7 +22,7 @@ public class TeacherServlet extends HttpServlet {
         if ( user_name == null || !user_name.equals("admin")) {
             request.getRequestDispatcher("index.jsp").forward(request,response);
         }
-        Teachers_entity teacher = new Teachers_entity();
+        TeachersEntity teacher = new TeachersEntity();
         teacher.setName(request.getParameter("teacher_name"));
         TeacherDao.persist_Teacher(teacher);
         request.getRequestDispatcher("admin.jsp").forward(request,response);

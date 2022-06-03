@@ -1,11 +1,10 @@
 package com.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
-@Table(name = "subjects", schema = "learner_academy")
-public class Subjects_entity {
+@Table(name = "teachers", schema = "learner_academy")
+public class TeachersEntity {
     private int id;
     private String name;
 
@@ -34,12 +33,20 @@ public class Subjects_entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Subjects_entity that = (Subjects_entity) o;
+        TeachersEntity that = (TeachersEntity) o;
 
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "TeachersEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     @Override

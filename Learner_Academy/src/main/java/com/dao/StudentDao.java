@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.entity.Students_entity;
+import com.entity.StudentsEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 
 public class StudentDao {
 
-    public static boolean persist_Student(Students_entity student){
+    public static boolean persist_Student(StudentsEntity student){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
@@ -29,7 +29,7 @@ public class StudentDao {
         return retVal;
     }
 
-    public static boolean delete_Student(Students_entity student){
+    public static boolean delete_Student(StudentsEntity student){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();

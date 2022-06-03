@@ -1,9 +1,7 @@
 package com.controller;
 
-import com.dao.StudentDao;
 import com.dao.SubjectDao;
-import com.entity.Students_entity;
-import com.entity.Subjects_entity;
+import com.entity.SubjectsEntity;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -24,9 +22,9 @@ public class SubjectServlet extends HttpServlet {
         if ( user_name == null || !user_name.equals("admin")) {
             request.getRequestDispatcher("index.jsp").forward(request,response);
         }
-        Subjects_entity subject = new Subjects_entity();
+        SubjectsEntity subject = new SubjectsEntity();
         subject.setName(request.getParameter("subject_name"));
-        SubjectDao.persist_Subject(subject);
+        SubjectDao.persistSubject(subject);
         request.getRequestDispatcher("admin.jsp").forward(request,response);
     }
 }

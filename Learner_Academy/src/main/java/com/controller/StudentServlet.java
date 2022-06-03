@@ -1,7 +1,7 @@
 package com.controller;
 
 import com.dao.StudentDao;
-import com.entity.Students_entity;
+import com.entity.StudentsEntity;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -18,7 +18,7 @@ public class StudentServlet extends HttpServlet {
         if ( user_name == null || !user_name.equals("admin")) {
             request.getRequestDispatcher("index.jsp").forward(request,response);
         }
-        Students_entity student = new Students_entity();
+        StudentsEntity student = new StudentsEntity();
         student.setName(request.getParameter("student_name"));
         StudentDao.persist_Student(student);
         request.getRequestDispatcher("admin.jsp").forward(request,response);
