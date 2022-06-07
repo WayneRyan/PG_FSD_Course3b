@@ -1,49 +1,71 @@
 package com.dao;
 
 import com.entity.TeachersEntity;
+import com.resources.DbResource;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TeacherDao {
-    public static boolean persist_Teacher(TeachersEntity teacher){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction et = em.getTransaction();
+
+    public static boolean persist_Teacher(TeachersEntity teacher) {
+        EntityTransaction et = DbResource.getTransaction();
         boolean retVal = false;
         try {
             et.begin();
-            em.persist(teacher);
+            DbResource.persist(teacher);
             et.commit();
             retVal = true;
         } finally {
-            if (et.isActive()){
+            if (et.isActive()) {
                 et.rollback();
             }
-            em.close();
-            emf.close();
         }
         return retVal;
     }
 
-    public static boolean delete_Teacher(TeachersEntity teacher){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction et = em.getTransaction();
+    public static List<TeachersEntity> getAllTeachers() {
+        EntityTransaction et = DbResource.getTransaction();
+        List<TeachersEntity> retval = new ArrayList<>();
+        try {
+            TypedQuery<TeachersEntity> tq = DbResource.createQuery("SELECT te FROM TeachersEntity te", TeachersEntity.class);
+            retval = tq.getResultList();
+        } finally {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        }
+        return retval;
+    }
+
+    public static TeachersEntity getTeacher(int id){
+        EntityTransaction et = DbResource.getTransaction();
+        TeachersEntity retval = null;
+        try {
+            TypedQuery<TeachersEntity> tq = DbResource.createQuery("SELECT te FROM TeachersEntity te where id=?1", TeachersEntity.class);
+            tq.setParameter(1,id);
+            retval = tq.getSingleResult();
+        } finally {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        }
+        return retval;
+    }
+
+    public static boolean delete_Teacher(TeachersEntity teacher) {
+        EntityTransaction et = DbResource.getTransaction();
         boolean retVal = false;
         try {
             et.begin();
-            em.remove(teacher);
+            DbResource.remove(teacher);
             et.commit();
             retVal = true;
         } finally {
-            if (et.isActive()){
+            if (et.isActive()) {
                 et.rollback();
             }
-            em.close();
-            emf.close();
         }
         return retVal;
     }

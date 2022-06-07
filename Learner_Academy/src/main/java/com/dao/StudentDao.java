@@ -1,50 +1,73 @@
 package com.dao;
 
 import com.entity.StudentsEntity;
+import com.resources.DbResource;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentDao {
 
-    public static boolean persist_Student(StudentsEntity student){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction et = em.getTransaction();
+    public static boolean persist_Student(StudentsEntity student) {
+        EntityTransaction et = DbResource.getTransaction();
         boolean retVal = false;
         try {
             et.begin();
-            em.persist(student);
+            DbResource.persist(student);
             et.commit();
             retVal = true;
+        } catch (Exception e) {
         } finally {
-            if (et.isActive()){
+            if (et.isActive()) {
                 et.rollback();
             }
-            em.close();
-            emf.close();
         }
         return retVal;
     }
 
-    public static boolean delete_Student(StudentsEntity student){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction et = em.getTransaction();
+    public static StudentsEntity getStudent(int id){
+        EntityTransaction et = DbResource.getTransaction();
+        StudentsEntity retval = null;
+        try {
+            TypedQuery<StudentsEntity> tq = DbResource.createQuery("SELECT se FROM StudentsEntity se where id=?1", StudentsEntity.class);
+            tq.setParameter(1,id);
+            retval = tq.getSingleResult();
+        } finally {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        }
+        return retval;
+    }
+
+    public static List<StudentsEntity> getAllStudents() {
+        EntityTransaction et = DbResource.getTransaction();
+        List<StudentsEntity> retval = new ArrayList<>();
+        try {
+            TypedQuery<StudentsEntity> tq = DbResource.createQuery("SELECT se FROM StudentsEntity se", StudentsEntity.class);
+            retval = tq.getResultList();
+        } finally {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        }
+        return retval;
+    }
+
+
+    public static boolean delete_Student(StudentsEntity student) {
+        EntityTransaction et = DbResource.getTransaction();
         boolean retVal = false;
         try {
             et.begin();
-            em.remove(student);
+            DbResource.remove(student);
             et.commit();
             retVal = true;
         } finally {
-            if (et.isActive()){
+            if (et.isActive()) {
                 et.rollback();
             }
-            em.close();
-            emf.close();
         }
         return retVal;
     }
