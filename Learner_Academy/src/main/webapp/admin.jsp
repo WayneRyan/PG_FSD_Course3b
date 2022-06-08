@@ -1,12 +1,9 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.entity.SubjectsEntity" %>
-<%@ page import="com.dao.SubjectDao" %>
-<%@ page import="com.entity.TeachersEntity" %>
-<%@ page import="com.dao.TeacherDao" %>
-<%@ page import="com.entity.ClassesEntity" %>
 <%@ page import="com.dao.ClassDao" %>
-<%@ page import="com.entity.StudentsEntity" %>
-<%@ page import="com.dao.StudentDao" %><%--
+<%@ page import="com.dao.StudentDao" %>
+<%@ page import="com.entity.*" %>
+<%@ page import="com.dao.TeacherDao" %>
+<%@ page import="com.dao.SubjectDao" %><%--
   Created by IntelliJ IDEA.
   User: wryan
   Date: 6/2/2022
@@ -26,9 +23,9 @@
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
     List<SubjectsEntity> allSubjects = SubjectDao.getAllSubjects();
-    List<TeachersEntity> allTeachers = TeacherDao.getAllTeachers();
     List<ClassesEntity> allClasses = ClassDao.getAllClasses();
     List<StudentsEntity> allStudents = StudentDao.getAllStudents();
+    List<com.entity.TeachersEntity> allTeachers = TeacherDao.getAllTeachers();
 %>
 <h2 class="center">Admin Page</h2>
 <div class="center">
@@ -41,12 +38,7 @@
             <input type="reset" name="reset" value="reset">
         </form>
         <h3>All Subjects</h3>
-        <ul>
-            <% for (SubjectsEntity se : allSubjects) { %>
-            <li><a href="subjectReport.jsp?subct_id=<%= se.getId() %>"><%= se.getName() %></a>
-            </li>
-            <% } %>
-        </ul>
+        <%@include file="subjectList.jsp"%>
     </div>
     <div>
         <h3>Add new teacher</h3>
@@ -57,12 +49,7 @@
             <input type="reset" name="reset" value="reset">
         </form>
         <h3>All Teachers</h3>
-        <ul>
-            <% for (TeachersEntity te : allTeachers) { %>
-            <li><%= te.getName() %>
-            </li>
-            <% } %>
-        </ul>
+        <%@include file="teacherList.jsp"%>
     </div>
     <div>
         <h3>Add new Class</h3>
@@ -87,23 +74,7 @@
             <input type="reset" name="reset" value="reset">
         </form>
         <h3>All Classes</h3>
-        <table>
-            <thead>
-            <th>Name</th>
-            <th>Subject</th>
-            <th>Teacher</th>
-            </thead>
-            <% for (ClassesEntity ce : allClasses) { %>
-            <tr>
-                <td><%= ce.getName() %>
-                </td>
-                <td><%= ce.getSubject().getName() %>
-                </td>
-                <td><%= ce.getTeacher().getName() %>
-                </td>
-            </tr>
-            <% } %>
-        </table>
+        <%@include file="classTable.jsp"%>
     </div>
     <div>
         <h3>Add new student</h3>
@@ -112,7 +83,7 @@
             <input type="text" name="student_name"/><br/>
             <label>Course:</label>
             <select name="course_id">
-                <% for (ClassesEntity ce : allClasses) { System.out.println(ce);%>
+                <% for (ClassesEntity ce : allClasses) { %>
                 <option value="<%= ce.getId() %>"><%= ce.getName() %>
                 </option>
                 <% } %>
@@ -121,20 +92,7 @@
             <input type="reset" name="reset" value="reset">
         </form>
         <h3>All Students</h3>
-        <table>
-            <thead>
-            <th>Name</th>
-            <th>Course</th>
-            </thead>
-            <% for (StudentsEntity se : allStudents) { System.out.println(se);%>
-            <tr>
-                <td><%= se.getName() %>
-                </td>
-                <td><%= se.getCourse().getName() %>
-                </td>
-            </tr>
-            <% } %>
-        </table>
+        <%@include file="studentTable.jsp"%>
     </div>
 </div>
 </body>

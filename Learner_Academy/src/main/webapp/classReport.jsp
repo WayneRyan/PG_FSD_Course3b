@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Class Report</title>
+    <link rel="stylesheet" href="CSS/main.css">
+    <script src="https://kit.fontawesome.com/4164eda486.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <%
@@ -17,6 +19,6 @@
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 %>
-<h3>Class Report</h3>
+<h3><a href="admin.jsp"><i class="fa-solid fa-house"></i></a>Class Report</h3>
 </body>
 </html>
