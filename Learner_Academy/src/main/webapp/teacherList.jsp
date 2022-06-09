@@ -13,7 +13,9 @@
 <body>
 <ul>
     <% for (TeachersEntity te : allTeachers) { %>
-    <li><a href="teacherReport.jsp?teacher_id=<%= te.getId() %>"><%= te.getName() %></a></li>
+    <li><a href="TeacherServlet?teacher_id=<%= te.getId() %>"><i class="fa-solid fa-trash-can"></i></a><a
+            href="teacherReport.jsp?teacher_id=<%= te.getId() %>"><%= te.getName() %>
+    </a></li>
     <% } %>
 </ul>
 </body>

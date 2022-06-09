@@ -12,10 +12,12 @@
 </head>
 <body>
 <ul>
-  <% for (SubjectsEntity se : allSubjects) { %>
-  <li><a href="subjectReport.jsp?subject_id=<%= se.getId() %>"><%= se.getName() %></a>
-  </li>
-  <% } %>
+    <% for (SubjectsEntity se : allSubjects) { %>
+    <li><a href="SubjectServlet?subject_id=<%= se.getId() %>"><i class="fa-solid fa-trash-can"></i></a><a
+            href="subjectReport.jsp?subject_id=<%= se.getId() %>"><%= se.getName() %>
+    </a>
+    </li>
+    <% } %>
 </ul>
 
 </body>

@@ -23,16 +23,16 @@ public class SubjectsEntity implements Serializable {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Set<ClassesEntity> getClasses() {
@@ -61,6 +61,7 @@ public class SubjectsEntity implements Serializable {
         return "SubjectsEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", classCnt='" + classes.size() +
                 '}';
     }
 

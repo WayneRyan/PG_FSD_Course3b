@@ -22,7 +22,7 @@
     String user_name = (String) session.getAttribute("user_name");
     try {
         subject_id = Integer.parseInt(request.getParameter("subject_id"));
-    } catch (Exception e){
+    } catch (Exception e) {
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
     if (subject_id == -1 || user_name == null || !user_name.equals("admin")) {
@@ -31,7 +31,8 @@
     SubjectsEntity subent = SubjectDao.getSubject(subject_id);
     List<ClassesEntity> allClasses = new ArrayList<>(subent.getClasses());
 %>
-<h3><a href="admin.jsp"><i class="fa-solid fa-house"></i></a>Subject Report For: <%=subent.getName()%></h3>
-<%@include file="classTable.jsp"%>
+<h3><a href="admin.jsp"><i class="fa-solid fa-house"></i></a>Subject Report For: <%=subent.getName()%>
+</h3>
+<%@include file="classTable.jsp" %>
 </body>
 </html>

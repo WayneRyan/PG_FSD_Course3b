@@ -1,10 +1,10 @@
 package com.dao;
 
-import com.entity.ClassesEntity;
 import com.entity.SubjectsEntity;
 import com.resources.DbResource;
 
-import javax.persistence.*;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,12 +26,12 @@ public class SubjectDao {
         return retVal;
     }
 
-    public static SubjectsEntity getSubject(int id){
+    public static SubjectsEntity getSubject(int id) {
         EntityTransaction et = DbResource.getTransaction();
         SubjectsEntity retval = null;
         try {
             TypedQuery<SubjectsEntity> tq = DbResource.createQuery("SELECT se FROM SubjectsEntity se where id=?1", SubjectsEntity.class);
-            tq.setParameter(1,id);
+            tq.setParameter(1, id);
             retval = tq.getSingleResult();
         } finally {
             if (et.isActive()) {

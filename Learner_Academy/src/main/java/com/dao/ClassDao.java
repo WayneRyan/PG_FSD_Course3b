@@ -1,10 +1,10 @@
 package com.dao;
 
 import com.entity.ClassesEntity;
-import com.entity.StudentsEntity;
 import com.resources.DbResource;
 
-import javax.persistence.*;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +27,12 @@ public class ClassDao {
         return retVal;
     }
 
-    public static ClassesEntity getCourse(int id){
+    public static ClassesEntity getCourse(int id) {
         EntityTransaction et = DbResource.getTransaction();
         ClassesEntity retval = null;
         try {
             TypedQuery<ClassesEntity> tq = DbResource.createQuery("SELECT ce FROM ClassesEntity ce where id=?1", ClassesEntity.class);
-            tq.setParameter(1,id);
+            tq.setParameter(1, id);
             retval = tq.getSingleResult();
         } finally {
             if (et.isActive()) {

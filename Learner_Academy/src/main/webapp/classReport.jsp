@@ -25,7 +25,7 @@
     }
     try {
         class_id = Integer.parseInt(request.getParameter("class_id"));
-    } catch (Exception e){
+    } catch (Exception e) {
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
     if (class_id == -1 || user_name == null || !user_name.equals("admin")) {
@@ -34,7 +34,8 @@
     ClassesEntity courseEnt = ClassDao.getCourse(class_id);
     List<StudentsEntity> allStudents = new ArrayList<>(courseEnt.getStudents());
 %>
-<h3><a href="admin.jsp"><i class="fa-solid fa-house"></i></a>Class Report for: <%=courseEnt.getName()%></h3>
-<%@include file="studentTable.jsp"%>
+<h3><a href="admin.jsp"><i class="fa-solid fa-house"></i></a>Class Report for: <%=courseEnt.getName()%>
+</h3>
+<%@include file="studentTable.jsp" %>
 </body>
 </html>

@@ -22,13 +22,13 @@ public class StudentServlet extends HttpServlet {
             if (user_name == null || !user_name.equals("admin")) {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
-            if (StudentDao.delete_Student(StudentDao.getStudent(Integer.parseInt(request.getParameter("student_id"))))){
+            if (StudentDao.delete_Student(StudentDao.getStudent(Integer.parseInt(request.getParameter("student_id"))))) {
                 request.getRequestDispatcher("admin.jsp").forward(request, response);
             } else {
                 response.getWriter().println("<font style=\"color:red;\">Error removing student.</font><br/>");
                 request.getRequestDispatcher("admin.jsp").include(request, response);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
@@ -52,7 +52,7 @@ public class StudentServlet extends HttpServlet {
                 response.getWriter().println("<font style=\"color:red;\">Error adding student.</font><br/>");
                 request.getRequestDispatcher("admin.jsp").include(request, response);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 

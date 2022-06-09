@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.dao.ClassDao;
-import com.dao.StudentDao;
 import com.dao.SubjectDao;
 import com.dao.TeacherDao;
 import com.entity.ClassesEntity;
@@ -24,8 +23,8 @@ public class ClassServlet extends HttpServlet {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
             ClassesEntity ce = ClassDao.getCourse(Integer.parseInt(request.getParameter("class_id")));
-            if(ce.getStudents().isEmpty()){
-                if (ClassDao.delete_Class(ce)){
+            if (ce.getStudents().isEmpty()) {
+                if (ClassDao.delete_Class(ce)) {
                     request.getRequestDispatcher("admin.jsp").forward(request, response);
                 } else {
                     response.getWriter().println("<font style=\"color:red;\">Error removing course.</font><br/>");
@@ -35,7 +34,7 @@ public class ClassServlet extends HttpServlet {
                 response.getWriter().println("<font style=\"color:red;\">Students are assigned to this course. If you wish to delete the course you must first delete the students</font><br/>");
                 request.getRequestDispatcher("classReport.jsp").include(request, response);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
@@ -57,10 +56,10 @@ public class ClassServlet extends HttpServlet {
             if (ClassDao.persist_Class(course)) {
                 request.getRequestDispatcher("admin.jsp").forward(request, response);
             } else {
-                response.getWriter().println("<font style=\"color:red;\">Error adding class. A teacher can only be assigned to different classes for different subjects</font><br/>");
+                response.getWriter().println("<font style=\"color:red;\">Error adding class. A teacher can only be assigned to different classes for different subjects. Each class must have a unique name.</font><br/>");
                 request.getRequestDispatcher("admin.jsp").include(request, response);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }

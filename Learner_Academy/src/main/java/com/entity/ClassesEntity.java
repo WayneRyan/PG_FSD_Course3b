@@ -38,6 +38,7 @@ public class ClassesEntity implements Serializable {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -45,6 +46,7 @@ public class ClassesEntity implements Serializable {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -52,6 +54,7 @@ public class ClassesEntity implements Serializable {
     public int getTeacher_id() {
         return teacher_id;
     }
+
     public void setTeacher_id(int teacher_id) {
         this.teacher_id = teacher_id;
     }
@@ -59,6 +62,7 @@ public class ClassesEntity implements Serializable {
     public int getSubject_id() {
         return subject_id;
     }
+
     public void setSubject_id(int subject_id) {
         this.subject_id = subject_id;
     }
@@ -66,6 +70,7 @@ public class ClassesEntity implements Serializable {
     public SubjectsEntity getSubject() {
         return subject;
     }
+
     public void setSubject(SubjectsEntity subject) {
         this.subject = subject;
     }
@@ -73,12 +78,18 @@ public class ClassesEntity implements Serializable {
     public TeachersEntity getTeacher() {
         return teacher;
     }
+
     public void setTeacher(TeachersEntity teacher) {
         this.teacher = teacher;
     }
 
-    public Set<StudentsEntity> getStudents() { return students; }
-    public void setStudents(Set<StudentsEntity> students) { this.students = students; }
+    public Set<StudentsEntity> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<StudentsEntity> students) {
+        this.students = students;
+    }
 
     @Override
     public boolean equals(Object o) {

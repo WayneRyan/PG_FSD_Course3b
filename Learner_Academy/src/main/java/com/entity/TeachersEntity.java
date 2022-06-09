@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "teachers", schema = "learner_academy")
-public class TeachersEntity  implements Serializable {
+public class TeachersEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,7 @@ public class TeachersEntity  implements Serializable {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -34,6 +35,7 @@ public class TeachersEntity  implements Serializable {
     public Set<ClassesEntity> getClasses() {
         return classes;
     }
+
     public void setClasses(Set<ClassesEntity> classes) {
         this.classes = classes;
     }

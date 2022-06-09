@@ -3,7 +3,8 @@ package com.dao;
 import com.entity.TeachersEntity;
 import com.resources.DbResource;
 
-import javax.persistence.*;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,12 +40,12 @@ public class TeacherDao {
         return retval;
     }
 
-    public static TeachersEntity getTeacher(int id){
+    public static TeachersEntity getTeacher(int id) {
         EntityTransaction et = DbResource.getTransaction();
         TeachersEntity retval = null;
         try {
             TypedQuery<TeachersEntity> tq = DbResource.createQuery("SELECT te FROM TeachersEntity te where id=?1", TeachersEntity.class);
-            tq.setParameter(1,id);
+            tq.setParameter(1, id);
             retval = tq.getSingleResult();
         } finally {
             if (et.isActive()) {
