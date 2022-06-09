@@ -15,21 +15,46 @@ import java.io.IOException;
 public class StudentServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String user_name = (String) request.getSession().getAttribute("user_name");
-        if (user_name == null || !user_name.equals("admin")) {
+        try {
+            String user_name = (String) request.getSession().getAttribute("user_name");
+            if (user_name == null || !user_name.equals("admin")) {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+            if (StudentDao.delete_Student(StudentDao.getStudent(Integer.parseInt(request.getParameter("student_id"))))){
+                request.getRequestDispatcher("admin.jsp").forward(request, response);
+            } else {
+                response.getWriter().println("<font style=\"color:red;\">Error removing student.</font><br/>");
+                request.getRequestDispatcher("admin.jsp").include(request, response);
+            }
+        } catch (Exception e){
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-        StudentsEntity student = new StudentsEntity();
-        student.setName(request.getParameter("student_name"));
-        student.setCourse_id(Integer.parseInt(request.getParameter("course_id")));
-        student.setCourse(ClassDao.getCourse(student.getCourse_id()));
-        if (StudentDao.persist_Student(student)) {
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
-        } else {
-            response.getWriter().println("<font style=\"color:red;\">Error adding student.</font><br/>");
-            request.getRequestDispatcher("admin.jsp").include(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            String user_name = (String) request.getSession().getAttribute("user_name");
+            if (user_name == null || !user_name.equals("admin")) {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+            StudentsEntity student = new StudentsEntity();
+            student.setName(request.getParameter("student_name"));
+            student.setCourse_id(Integer.parseInt(request.getParameter("course_id")));
+            student.setCourse(ClassDao.getCourse(student.getCourse_id()));
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            if (StudentDao.persist_Student(student)) {
+                request.getRequestDispatcher("admin.jsp").forward(request, response);
+            } else {
+                response.getWriter().println("<font style=\"color:red;\">Error adding student.</font><br/>");
+                request.getRequestDispatcher("admin.jsp").include(request, response);
+            }
+        } catch (Exception e){
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
+
     }
 }

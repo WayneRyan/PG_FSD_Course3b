@@ -15,6 +15,7 @@
 <head>
     <title>Admin Page</title>
     <link rel="stylesheet" href="CSS/main.css">
+    <script src="https://kit.fontawesome.com/4164eda486.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <%

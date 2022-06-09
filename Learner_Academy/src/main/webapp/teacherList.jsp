@@ -13,8 +13,7 @@
 <body>
 <ul>
     <% for (TeachersEntity te : allTeachers) { %>
-    <li><a href="teacherReport.jsp?teacher_id=<%= te.getId() %>"><%= te.getName() %></a>
-    </li>
+    <li><a href="teacherReport.jsp?teacher_id=<%= te.getId() %>"><%= te.getName() %></a></li>
     <% } %>
 </ul>
 </body>

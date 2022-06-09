@@ -56,4 +56,20 @@ public class ClassDao {
         return retval;
     }
 
+    public static boolean delete_Class(ClassesEntity course) {
+        EntityTransaction et = DbResource.getTransaction();
+        boolean retVal = false;
+        try {
+            et.begin();
+            DbResource.remove(course);
+            et.commit();
+            retVal = true;
+        } finally {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        }
+        return retVal;
+    }
+
 }

@@ -24,11 +24,11 @@ public class ClassesEntity implements Serializable {
     @Column(name = "subject")
     private int subject_id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher", insertable = false, updatable = false, nullable = false)
     private TeachersEntity teacher;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "subject", insertable = false, updatable = false, nullable = false)
     private SubjectsEntity subject;
 

@@ -19,12 +19,9 @@
   </thead>
   <% for (ClassesEntity ce : allClasses) { %>
   <tr>
-    <td><%= ce.getName() %>
-    </td>
-    <td><%= ce.getSubject().getName() %>
-    </td>
-    <td><%= ce.getTeacher().getName() %>
-    </td>
+    <td><a href="ClassServlet?class_id=<%= ce.getId() %>"><i class="fa-solid fa-trash-can"></i></a><a href="classReport.jsp?class_id=<%= ce.getId() %>"><%= ce.getName() %></a></td>
+    <td><a href="subjectReport.jsp?subject_id=<%= ce.getSubject().getId() %>"><%= ce.getSubject().getName() %></a></td>
+    <td><a href="teacherReport.jsp?teacher_id=<%= ce.getTeacher().getId() %>"><%= ce.getTeacher().getName() %></a></td>
   </tr>
   <% } %>
 </table>

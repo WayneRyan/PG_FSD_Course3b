@@ -55,7 +55,6 @@ public class StudentDao {
         return retval;
     }
 
-
     public static boolean delete_Student(StudentsEntity student) {
         EntityTransaction et = DbResource.getTransaction();
         boolean retVal = false;

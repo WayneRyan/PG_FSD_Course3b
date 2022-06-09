@@ -18,10 +18,9 @@
     </thead>
     <% for (StudentsEntity se : allStudents) { %>
     <tr>
-        <td><%= se.getName() %>
+        <td><a href="StudentServlet?student_id=<%= se.getId() %>"><i class="fa-solid fa-trash-can"></i></a><%= se.getName() %>
         </td>
-        <td><%= se.getCourse().getName() %>
-        </td>
+        <td><a href="classReport.jsp?class_id=<%= se.getCourse().getId() %>"><%= se.getCourse().getName() %></a></td>
     </tr>
     <% } %>
 </table>

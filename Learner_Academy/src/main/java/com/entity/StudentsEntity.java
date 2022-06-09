@@ -19,7 +19,7 @@ public class StudentsEntity  implements Serializable {
     @Column(name = "course")
     private int course_id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "course", insertable = false, updatable = false, nullable = false)
     private ClassesEntity course;
 
