@@ -18,7 +18,10 @@ public class TeacherDao {
             DbResource.persist(teacher);
             et.commit();
             retVal = true;
-        } finally {
+        } catch (Exception e) {
+            System.out.println("Throwing error when persisting Teacher: " + e);
+        }
+        finally {
             if (et.isActive()) {
                 et.rollback();
             }

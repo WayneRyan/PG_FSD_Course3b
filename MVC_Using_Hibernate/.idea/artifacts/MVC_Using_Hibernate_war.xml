@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="MVC_Using_Hibernate:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>MVC_Using_Hibernate</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="MVC_Using_Hibernate-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="MVC_Using_Hibernate:war exploded" />
+    </root>
+  </artifact>
+</component>
